@@ -26,6 +26,13 @@ func main() {
 	}
 
 	Print(accountBalance)
+
+	recentActivities, err := c.KBankRecentAccountActivities("1246796189")
+	if err != nil {
+		panic(err)
+	}
+
+	Print(recentActivities)
 }
 
 
