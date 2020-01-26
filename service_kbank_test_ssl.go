@@ -6,10 +6,8 @@ package thaibankclient
 
 import (
 	"crypto/tls"
-	"encoding/json"
 	"github.com/kazekim/req"
 	"net/http"
-	"fmt"
 )
 
 type serviceKBankTestSSLRequest struct {
@@ -82,13 +80,6 @@ func (s *defaultKBankService) TestSSL(request *serviceKBankTestSSLRequest) (*ser
 	if err != nil {
 		return nil, err
 	}
-	//
-	//body, err := ioutil.ReadAll(r.Response().Body)
-	//if err != nil {
-	//	log.Fatalln(err)
-	//}
-	//
-	//log.Println("verify result", string(body))
 
 	var response serviceKBankTestSSLResponse
 	err = r.ToJSON(&response)
@@ -97,9 +88,4 @@ func (s *defaultKBankService) TestSSL(request *serviceKBankTestSSLRequest) (*ser
 	}
 
 	return &response, nil
-}
-
-func Print(value interface{}) {
-	marshalStruct, _ := json.MarshalIndent(value, "", "\t")
-	fmt.Println(string(marshalStruct))
 }

@@ -6,13 +6,13 @@ package thaibankclient
 
 import "github.com/mitchellh/mapstructure"
 
-func (c *defaultClient) KBankRecentAccountActivities(accountNumber string) (*RecentAccountActivitiesResponse, error) {
+func (c *defaultClient) KBankRecentAccountActivities(request *KBankRecentAccountActivitiesRequest) (*RecentAccountActivitiesResponse, error) {
 
 	if c.kBankSvc == nil {
 		return nil, ErrKBankConfigNotDefined
 	}
 
-	req := c.kBankSvc.NewRecentAccountActivitiesRequest(accountNumber)
+	req := c.kBankSvc.NewRecentAccountActivitiesRequest(request)
 	resp, err := c.kBankSvc.RecentAccountActivities(req)
 	if err != nil {
 		return nil, err
@@ -44,4 +44,3 @@ func (c *defaultClient) KBankRecentAccountActivities(accountNumber string) (*Rec
 
 	return &response, nil
 }
-

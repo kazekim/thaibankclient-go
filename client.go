@@ -19,8 +19,8 @@ type Client interface {
 
 	SetHttpClient(client *http.Client)
 
-	KBankCheckBalance(accountNumber string) (*AccountBalanceResponse, error)
-	KBankRecentAccountActivities(accountNumber string) (*RecentAccountActivitiesResponse, error)
+	KBankCheckBalance(request *KBankCheckBalanceRequest) (*AccountBalanceResponse, error)
+	KBankRecentAccountActivities(request *KBankRecentAccountActivitiesRequest) (*RecentAccountActivitiesResponse, error)
 	KBankTestSSL() (*KBankTestSSLResponse, error)
 }
 

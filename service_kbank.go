@@ -17,8 +17,8 @@ type kBankService interface {
 	RecentAccountActivities(request *serviceKBankRecentAccountActivitiesRequest) (*serviceKBankRecentAccountActivitiesResponse, error)
 	TestSSL(request *serviceKBankTestSSLRequest) (*serviceKBankTestSSLResponse, error)
 
-	NewCheckBalanceRequest(accountNumber string) *serviceKBankCheckBalanceRequest
-	NewRecentAccountActivitiesRequest(accountNumber string) *serviceKBankRecentAccountActivitiesRequest
+	NewCheckBalanceRequest(request *KBankCheckBalanceRequest) *serviceKBankCheckBalanceRequest
+	NewRecentAccountActivitiesRequest(request *KBankRecentAccountActivitiesRequest) *serviceKBankRecentAccountActivitiesRequest
 	NewTestSSLRequest() (*serviceKBankTestSSLRequest, error)
 }
 

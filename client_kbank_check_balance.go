@@ -8,13 +8,13 @@ import (
 	"github.com/mitchellh/mapstructure"
 )
 
-func (c *defaultClient) KBankCheckBalance(accountNumber string) (*AccountBalanceResponse, error) {
+func (c *defaultClient) KBankCheckBalance(request *KBankCheckBalanceRequest) (*AccountBalanceResponse, error) {
 
 	if c.kBankSvc == nil {
 		return nil, ErrKBankConfigNotDefined
 	}
 
-	req := c.kBankSvc.NewCheckBalanceRequest(accountNumber)
+	req := c.kBankSvc.NewCheckBalanceRequest(request)
 	resp, err := c.kBankSvc.CheckBalance(req)
 	if err != nil {
 		return nil, err

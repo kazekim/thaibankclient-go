@@ -33,7 +33,7 @@ type serviceKBankCheckBalanceResponse struct {
 	AccountStatus *string `json:"acctStatus"`
 }
 
-func (s *defaultKBankService) NewCheckBalanceRequest(accountNumber string) *serviceKBankCheckBalanceRequest {
+func (s *defaultKBankService) NewCheckBalanceRequest(request *KBankCheckBalanceRequest) *serviceKBankCheckBalanceRequest {
 	return &serviceKBankCheckBalanceRequest{
 		Url: s.config.BaseUrl+APIKBankCheckBalance,
 		Header:serviceKBankCheckBalanceRequestHeader{
@@ -41,7 +41,7 @@ func (s *defaultKBankService) NewCheckBalanceRequest(accountNumber string) *serv
 			s.config.PartnerSecret,
 		},
 		Param:serviceKBankCheckBalanceRequestParam{
-			accountNumber,
+			request.AccountNumber,
 		},
 	}
 }

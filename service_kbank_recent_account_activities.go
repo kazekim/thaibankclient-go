@@ -60,7 +60,7 @@ type KBankRecentAccountActivity struct {
 	DebitCreditFlag string `json:"debitCreditFlag"`
 }
 
-func (s *defaultKBankService) NewRecentAccountActivitiesRequest(accountNumber string) *serviceKBankRecentAccountActivitiesRequest {
+func (s *defaultKBankService) NewRecentAccountActivitiesRequest(request *KBankRecentAccountActivitiesRequest) *serviceKBankRecentAccountActivitiesRequest {
 	return &serviceKBankRecentAccountActivitiesRequest{
 		Url: s.config.BaseUrl+APIKBankRecentAccountActivities,
 		Header:serviceKBankRecentAccountActivitiesRequestHeader{
@@ -68,7 +68,7 @@ func (s *defaultKBankService) NewRecentAccountActivitiesRequest(accountNumber st
 			s.config.PartnerSecret,
 		},
 		Param:serviceKBankRecentAccountActivitiesRequestParam{
-			accountNumber,
+			request.AccountNumber,
 		},
 	}
 }
