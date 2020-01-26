@@ -133,5 +133,3 @@ jwt.pem
 dist
 local
 package-lock.json
-
-playground
