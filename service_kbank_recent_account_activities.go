@@ -10,6 +10,7 @@ import (
 )
 
 type serviceKBankRecentAccountActivitiesRequest struct {
+	Url string
 	Header serviceKBankRecentAccountActivitiesRequestHeader
 	Param serviceKBankRecentAccountActivitiesRequestParam
 }
@@ -58,6 +59,7 @@ type KBankRecentAccountActivity struct {
 
 func (s *defaultKBankService) NewRecentAccountActivitiesRequest(accountNumber string) *serviceKBankRecentAccountActivitiesRequest {
 	return &serviceKBankRecentAccountActivitiesRequest{
+		Url: s.config.BaseUrl+APIKBankRecentAccountActivities,
 		Header:serviceKBankRecentAccountActivitiesRequestHeader{
 			s.config.PartnerID,
 			s.config.PartnerSecret,
@@ -69,7 +71,7 @@ func (s *defaultKBankService) NewRecentAccountActivitiesRequest(accountNumber st
 }
 func (s *defaultKBankService) RecentAccountActivities(request *serviceKBankRecentAccountActivitiesRequest) (*serviceKBankRecentAccountActivitiesResponse, error) {
 
-	url := fmt.Sprintf(APIKBankRecentAccountActivities, request.Param.AccountNumber)
+	url := fmt.Sprintf(request.Url, request.Param.AccountNumber)
 	header := req.HeaderFromStruct(request.Header)
 	r, err := s.req.Get(url, header, req.Header{
 		"cache-control": "no-cache",

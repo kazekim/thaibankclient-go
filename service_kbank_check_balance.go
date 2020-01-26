@@ -10,6 +10,7 @@ import (
 )
 
 type serviceKBankCheckBalanceRequest struct {
+	Url string
 	Header serviceKBankCheckBalanceRequestHeader
 	Param serviceKBankCheckBalanceRequestParam
 }
@@ -31,6 +32,7 @@ type serviceKBankCheckBalanceResponse struct {
 
 func (s *defaultKBankService) NewCheckBalanceRequest(accountNumber string) *serviceKBankCheckBalanceRequest {
 	return &serviceKBankCheckBalanceRequest{
+		Url: s.config.BaseUrl+APIKBankCheckBalance,
 		Header:serviceKBankCheckBalanceRequestHeader{
 			s.config.PartnerID,
 			s.config.PartnerSecret,
@@ -43,7 +45,7 @@ func (s *defaultKBankService) NewCheckBalanceRequest(accountNumber string) *serv
 
 func (s *defaultKBankService) CheckBalance(request *serviceKBankCheckBalanceRequest) (*serviceKBankCheckBalanceResponse, error) {
 
-	url := fmt.Sprintf(APIKBankCheckBalance, request.Param.AccountNumber)
+	url := fmt.Sprintf(request.Url, request.Param.AccountNumber)
 	header := req.HeaderFromStruct(request.Header)
 	r, err := s.req.Get(url, header, req.Header{
 		"cache-control": "no-cache",

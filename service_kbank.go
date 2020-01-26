@@ -7,8 +7,8 @@ package thaibankclient
 import "github.com/kazekim/req"
 
 const (
-	APIKBankCheckBalance = "https://APIPORTAL.kasikornbank.com:12002/deposit/sight/balance/%v"
-	APIKBankRecentAccountActivities = "https://APIPORTAL.kasikornbank.com:12002/deposit/sight/transactions/%v"
+	APIKBankCheckBalance = "/deposit/sight/balance/%v"
+	APIKBankRecentAccountActivities = "/deposit/sight/transactions/%v"
 	)
 
 type kBankService interface {
