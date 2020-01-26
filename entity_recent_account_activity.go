@@ -4,6 +4,12 @@
 
 package thaibankclient
 
+type RecentAccountActivitiesResponse struct {
+	Code string
+	Activities []RecentAccountActivity
+	Error THBError
+}
+
 type RecentAccountActivity struct {
 	ToAccountNo *string
 	ToBankCode *string

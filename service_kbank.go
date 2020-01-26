@@ -9,6 +9,7 @@ import "github.com/kazekim/req"
 const (
 	APIKBankCheckBalance = "/deposit/sight/balance/%v"
 	APIKBankRecentAccountActivities = "/deposit/sight/transactions/%v"
+	APIKBankTestSSL = "/test/ssl"
 	)
 
 type kBankService interface {

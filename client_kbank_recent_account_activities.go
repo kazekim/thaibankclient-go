@@ -6,7 +6,7 @@ package thaibankclient
 
 import "github.com/mitchellh/mapstructure"
 
-func (c *defaultClient) KBankRecentAccountActivities(accountNumber string) (*[]RecentAccountActivity, error) {
+func (c *defaultClient) KBankRecentAccountActivities(accountNumber string) (*RecentAccountActivitiesResponse, error) {
 
 	if c.kBankSvc == nil {
 		return nil, ErrKBankConfigNotDefined
@@ -18,9 +18,17 @@ func (c *defaultClient) KBankRecentAccountActivities(accountNumber string) (*[]R
 		return nil, err
 	}
 
+	var response RecentAccountActivitiesResponse
+	if resp.StatusCode != nil {
+		thbErr := NewKBankError(resp.StatusCode, resp.MessageTH, resp.MessageEN)
+		response.Code = *resp.StatusCode
+		response.Error = thbErr
+		return &response, nil
+	}
+
 	var activities []RecentAccountActivity
 
-	for _, item := range resp.Items {
+	for _, item := range *resp.Items {
 
 		var activity RecentAccountActivity
 		err := mapstructure.Decode(item, &activity)
@@ -31,6 +39,9 @@ func (c *defaultClient) KBankRecentAccountActivities(accountNumber string) (*[]R
 		activities = append(activities, activity)
 	}
 
-	return &activities, nil
+	response.Code = "200"
+	response.Activities = activities
+
+	return &response, nil
 }
 

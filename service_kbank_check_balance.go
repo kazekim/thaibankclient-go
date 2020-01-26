@@ -25,9 +25,12 @@ type serviceKBankCheckBalanceRequestParam struct {
 }
 
 type serviceKBankCheckBalanceResponse struct {
-	AvailableBalance float64 `json:"availBalance"`
-	AccountBalance float64 `json:"acctBalance"`
-	AccountStatus string `json:"acctStatus"`
+	StatusCode *string `json:"statusCode"`
+	MessageTH *string  `json:"messageTH"`
+	MessageEN *string  `json:"messageEN"`
+	AvailableBalance *float64 `json:"availBalance"`
+	AccountBalance *float64 `json:"acctBalance"`
+	AccountStatus *string `json:"acctStatus"`
 }
 
 func (s *defaultKBankService) NewCheckBalanceRequest(accountNumber string) *serviceKBankCheckBalanceRequest {

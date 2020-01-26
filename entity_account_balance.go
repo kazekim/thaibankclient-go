@@ -11,10 +11,17 @@ const (
 
 type AccountStatus string
 
+type AccountBalanceResponse struct {
+	Code string
+	AccountBalance *AccountBalance
+	Error THBError
+}
+
 type AccountBalance struct {
 	AvailableBalance float64
 	AccountBalance float64
 	AccountStatus string
+	Error *THBError
 }
 
 func (ab *AccountBalance) Status() AccountStatus {

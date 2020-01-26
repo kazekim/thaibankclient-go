@@ -19,8 +19,8 @@ type Client interface {
 
 	SetHttpClient(client *http.Client)
 
-	KBankCheckBalance(accountNumber string) (*AccountBalance, error)
-	KBankRecentAccountActivities(accountNumber string) (*[]RecentAccountActivity, error)
+	KBankCheckBalance(accountNumber string) (*AccountBalanceResponse, error)
+	KBankRecentAccountActivities(accountNumber string) (*RecentAccountActivitiesResponse, error)
 }
 
 type defaultClient struct {

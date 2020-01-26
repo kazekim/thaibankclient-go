@@ -25,8 +25,11 @@ type serviceKBankRecentAccountActivitiesRequestParam struct {
 }
 
 type serviceKBankRecentAccountActivitiesResponse struct {
-	TotalItems int `json:"totalItems"`
-	Items []KBankRecentAccountActivity `json:"items`
+	StatusCode *string `json:"statusCode"`
+	MessageTH *string  `json:"messageTH"`
+	MessageEN *string  `json:"messageEN"`
+	TotalItems *int `json:"totalItems"`
+	Items *[]KBankRecentAccountActivity `json:"items`
 }
 
 type KBankRecentAccountActivity struct {

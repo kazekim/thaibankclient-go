@@ -8,7 +8,7 @@ import (
 	"github.com/mitchellh/mapstructure"
 )
 
-func (c *defaultClient) KBankCheckBalance(accountNumber string) (*AccountBalance, error) {
+func (c *defaultClient) KBankCheckBalance(accountNumber string) (*AccountBalanceResponse, error) {
 
 	if c.kBankSvc == nil {
 		return nil, ErrKBankConfigNotDefined
@@ -20,11 +20,22 @@ func (c *defaultClient) KBankCheckBalance(accountNumber string) (*AccountBalance
 		return nil, err
 	}
 
-	var response AccountBalance
-	err = mapstructure.Decode(resp, &response)
+	var response AccountBalanceResponse
+
+	if resp.StatusCode != nil {
+		thbErr := NewKBankError(resp.StatusCode, resp.MessageTH, resp.MessageEN)
+		response.Code = *resp.StatusCode
+		response.Error = thbErr
+		return &response, nil
+	}
+
+	var ab AccountBalance
+	err = mapstructure.Decode(resp, &ab)
 	if err != nil {
 		return nil, err
 	}
+	response.Code = "200"
+	response.AccountBalance = &ab
 
 	return &response,nil
 }
