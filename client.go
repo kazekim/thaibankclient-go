@@ -21,6 +21,7 @@ type Client interface {
 
 	KBankCheckBalance(accountNumber string) (*AccountBalanceResponse, error)
 	KBankRecentAccountActivities(accountNumber string) (*RecentAccountActivitiesResponse, error)
+	KBankTestSSL() (*KBankTestSSLResponse, error)
 }
 
 type defaultClient struct {

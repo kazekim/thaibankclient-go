@@ -52,6 +52,7 @@ func (s *defaultKBankService) CheckBalance(request *serviceKBankCheckBalanceRequ
 	header := req.HeaderFromStruct(request.Header)
 	r, err := s.req.Get(url, header, req.Header{
 		"cache-control": "no-cache",
+		"content-type": "application/json",
 	})
 	if err != nil {
 		return nil, err

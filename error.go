@@ -5,7 +5,7 @@
 package thaibankclient
 
 type THBError interface {
-	CodeValue() string
+	StatusCodeValue() string
 	MessageTHValue() string
 	MessageENValue() string
 	Error() string

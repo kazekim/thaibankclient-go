@@ -12,7 +12,7 @@ const (
 type AccountStatus string
 
 type AccountBalanceResponse struct {
-	Code string
+	StatusCode string
 	AccountBalance *AccountBalance
 	Error THBError
 }

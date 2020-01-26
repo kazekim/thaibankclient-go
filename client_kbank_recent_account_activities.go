@@ -21,7 +21,7 @@ func (c *defaultClient) KBankRecentAccountActivities(accountNumber string) (*Rec
 	var response RecentAccountActivitiesResponse
 	if resp.StatusCode != nil {
 		thbErr := NewKBankError(resp.StatusCode, resp.MessageTH, resp.MessageEN)
-		response.Code = *resp.StatusCode
+		response.StatusCode = *resp.StatusCode
 		response.Error = thbErr
 		return &response, nil
 	}
@@ -39,7 +39,7 @@ func (c *defaultClient) KBankRecentAccountActivities(accountNumber string) (*Rec
 		activities = append(activities, activity)
 	}
 
-	response.Code = "200"
+	response.StatusCode = "200"
 	response.Activities = activities
 
 	return &response, nil

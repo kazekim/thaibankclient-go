@@ -7,21 +7,21 @@ package thaibankclient
 import "fmt"
 
 type kBankError struct {
-	Code string
+	StatusCode string
 	MessageTH *string
 	MessageEN *string
 }
 
-func NewKBankError(code, messageTH, messageEN *string) THBError {
+func NewKBankError(statusCode, messageTH, messageEN *string) THBError {
 	return &kBankError{
-		*code,
+		*statusCode,
 		messageTH,
 		messageEN,
 	}
 }
 
-func (e *kBankError) CodeValue() string {
-	return e.Code
+func (e *kBankError) StatusCodeValue() string {
+	return e.StatusCode
 }
 
 func (e *kBankError) MessageTHValue() string {
@@ -39,5 +39,5 @@ func (e *kBankError) MessageENValue() string {
 }
 
 func (e *kBankError) Error() string {
-	return fmt.Sprintf("code: %v - %v (%v)", e.Code, e.MessageENValue(), e.MessageTHValue())
+	return fmt.Sprintf("code: %v - %v (%v)", e.StatusCode, e.MessageENValue(), e.MessageTHValue())
 }

@@ -24,7 +24,7 @@ func (c *defaultClient) KBankCheckBalance(accountNumber string) (*AccountBalance
 
 	if resp.StatusCode != nil {
 		thbErr := NewKBankError(resp.StatusCode, resp.MessageTH, resp.MessageEN)
-		response.Code = *resp.StatusCode
+		response.StatusCode = *resp.StatusCode
 		response.Error = thbErr
 		return &response, nil
 	}
@@ -34,7 +34,7 @@ func (c *defaultClient) KBankCheckBalance(accountNumber string) (*AccountBalance
 	if err != nil {
 		return nil, err
 	}
-	response.Code = "200"
+	response.StatusCode = "200"
 	response.AccountBalance = &ab
 
 	return &response,nil

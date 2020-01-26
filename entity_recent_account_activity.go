@@ -5,7 +5,7 @@
 package thaibankclient
 
 type RecentAccountActivitiesResponse struct {
-	Code string
+	StatusCode string
 	Activities []RecentAccountActivity
 	Error THBError
 }

@@ -15,9 +15,11 @@ const (
 type kBankService interface {
 	CheckBalance(request *serviceKBankCheckBalanceRequest) (*serviceKBankCheckBalanceResponse, error)
 	RecentAccountActivities(request *serviceKBankRecentAccountActivitiesRequest) (*serviceKBankRecentAccountActivitiesResponse, error)
+	TestSSL(request *serviceKBankTestSSLRequest) (*serviceKBankTestSSLResponse, error)
 
 	NewCheckBalanceRequest(accountNumber string) *serviceKBankCheckBalanceRequest
 	NewRecentAccountActivitiesRequest(accountNumber string) *serviceKBankRecentAccountActivitiesRequest
+	NewTestSSLRequest() (*serviceKBankTestSSLRequest, error)
 }
 
 type defaultKBankService struct {
