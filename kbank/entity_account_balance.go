@@ -2,7 +2,11 @@
   GoLang code created by Jirawat Harnsiriwatanakit https://github.com/kazekim
 */
 
-package thaibankclient
+package kbank
+
+import (
+	"github.com/kazekim/thaibankclient-go/thcerror"
+)
 
 const (
 	Active AccountStatus = "Active"
@@ -12,16 +16,16 @@ const (
 type AccountStatus string
 
 type AccountBalanceResponse struct {
-	StatusCode string
+	StatusCode     string
 	AccountBalance *AccountBalance
-	Error THBError
+	Error          thcerror.Error
 }
 
 type AccountBalance struct {
 	AvailableBalance float64
 	AccountBalance float64
 	AccountStatus string
-	Error *THBError
+	Error *thcerror.Error
 }
 
 func (ab *AccountBalance) Status() AccountStatus {

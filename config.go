@@ -4,7 +4,9 @@
 
 package thaibankclient
 
+import "github.com/kazekim/thaibankclient-go/kbank"
+
 type Config struct {
-	KBank *KBankConfig
+	KBank *kbank.Config
 }
 

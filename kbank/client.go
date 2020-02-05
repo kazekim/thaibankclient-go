@@ -2,7 +2,7 @@
   GoLang code created by Jirawat Harnsiriwatanakit https://github.com/kazekim
 */
 
-package thaibankclient
+package kbank
 
 import (
 	"errors"
@@ -19,15 +19,15 @@ type Client interface {
 
 	SetHttpClient(client *http.Client)
 
-	KBankCheckBalance(request *KBankCheckBalanceRequest) (*AccountBalanceResponse, error)
-	KBankRecentAccountActivities(request *KBankRecentAccountActivitiesRequest) (*RecentAccountActivitiesResponse, error)
-	KBankTestSSL() (*KBankTestSSLResponse, error)
+	CheckBalance(request *CheckBalanceRequest) (*AccountBalanceResponse, error)
+	RecentAccountActivities(request *RecentAccountActivitiesRequest) (*RecentAccountActivitiesResponse, error)
+	TestSSL() (*TestSSLResponse, error)
 }
 
 type defaultClient struct {
-	req *req.Req
-	config Config
-	kBankSvc kBankService
+	req      *req.Req
+	config   Config
+	kBankSvc service
 }
 
 func NewClient(config Config) Client {
@@ -39,10 +39,8 @@ func NewClient(config Config) Client {
 		config: config,
 	}
 
-	if config.KBank != nil {
-		kBankSvc := newKBankService(r, config.KBank)
-		client.kBankSvc = kBankSvc
-	}
+	kBankSvc := newService(r, &config)
+	client.kBankSvc = kBankSvc
 
 	return &client
 }

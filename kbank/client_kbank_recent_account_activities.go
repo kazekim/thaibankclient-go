@@ -2,11 +2,13 @@
   GoLang code created by Jirawat Harnsiriwatanakit https://github.com/kazekim
 */
 
-package thaibankclient
+package kbank
 
-import "github.com/mitchellh/mapstructure"
+import (
+	"github.com/mitchellh/mapstructure"
+)
 
-func (c *defaultClient) KBankRecentAccountActivities(request *KBankRecentAccountActivitiesRequest) (*RecentAccountActivitiesResponse, error) {
+func (c *defaultClient) RecentAccountActivities(request *RecentAccountActivitiesRequest) (*RecentAccountActivitiesResponse, error) {
 
 	if c.kBankSvc == nil {
 		return nil, ErrKBankConfigNotDefined

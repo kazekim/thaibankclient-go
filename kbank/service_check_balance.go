@@ -2,7 +2,7 @@
   GoLang code created by Jirawat Harnsiriwatanakit https://github.com/kazekim
 */
 
-package thaibankclient
+package kbank
 
 import (
 	"fmt"
@@ -33,9 +33,9 @@ type serviceKBankCheckBalanceResponse struct {
 	AccountStatus *string `json:"acctStatus"`
 }
 
-func (s *defaultKBankService) NewCheckBalanceRequest(request *KBankCheckBalanceRequest) *serviceKBankCheckBalanceRequest {
+func (s *defaultService) NewCheckBalanceRequest(request *CheckBalanceRequest) *serviceKBankCheckBalanceRequest {
 	return &serviceKBankCheckBalanceRequest{
-		Url: s.config.BaseUrl+APIKBankCheckBalance,
+		Url: s.config.BaseUrl+ APIKBankCheckBalance,
 		Header:serviceKBankCheckBalanceRequestHeader{
 			s.config.PartnerID,
 			s.config.PartnerSecret,
@@ -46,7 +46,7 @@ func (s *defaultKBankService) NewCheckBalanceRequest(request *KBankCheckBalanceR
 	}
 }
 
-func (s *defaultKBankService) CheckBalance(request *serviceKBankCheckBalanceRequest) (*serviceKBankCheckBalanceResponse, error) {
+func (s *defaultService) CheckBalance(request *serviceKBankCheckBalanceRequest) (*serviceKBankCheckBalanceResponse, error) {
 
 	url := fmt.Sprintf(request.Url, request.Param.AccountNumber)
 	header := req.HeaderFromStruct(request.Header)

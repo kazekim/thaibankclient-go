@@ -2,9 +2,12 @@
   GoLang code created by Jirawat Harnsiriwatanakit https://github.com/kazekim
 */
 
-package thaibankclient
+package kbank
 
-import "fmt"
+import (
+	"fmt"
+	"github.com/kazekim/thaibankclient-go/thcerror"
+)
 
 type kBankError struct {
 	StatusCode string
@@ -12,7 +15,7 @@ type kBankError struct {
 	MessageEN *string
 }
 
-func NewKBankError(statusCode, messageTH, messageEN *string) THBError {
+func NewKBankError(statusCode, messageTH, messageEN *string) thcerror.Error {
 	return &kBankError{
 		*statusCode,
 		messageTH,

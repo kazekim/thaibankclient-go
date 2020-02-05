@@ -2,11 +2,12 @@
   GoLang code created by Jirawat Harnsiriwatanakit https://github.com/kazekim
 */
 
-package thaibankclient
+package kbank
 
 import (
 	"crypto/tls"
 	"github.com/kazekim/req"
+	"github.com/kazekim/thaibankclient-go/tbccert"
 	"net/http"
 )
 
@@ -37,9 +38,9 @@ type serviceKBankCertificateObjects struct {
 	SerialNumber string `json:"serialNumber"`
 }
 
-func (s *defaultKBankService) NewTestSSLRequest() (*serviceKBankTestSSLRequest, error) {
+func (s *defaultService) NewTestSSLRequest() (*serviceKBankTestSSLRequest, error) {
 
-	g, err := NewTLSCertGenerator()
+	g, err := tbccert.NewTLSCertGenerator()
 	if err != nil {
 		return nil, err
 	}
@@ -50,7 +51,7 @@ func (s *defaultKBankService) NewTestSSLRequest() (*serviceKBankTestSSLRequest, 
 	}
 
 	return &serviceKBankTestSSLRequest{
-		Url: s.config.BaseUrl+APIKBankTestSSL,
+		Url: s.config.BaseUrl+ APIKBankTestSSL,
 		Body:serviceKBankTestSSLRequestBody{
 			s.config.PartnerID,
 			s.config.PartnerSecret,
@@ -59,7 +60,7 @@ func (s *defaultKBankService) NewTestSSLRequest() (*serviceKBankTestSSLRequest, 
 	}, nil
 }
 
-func (s *defaultKBankService) TestSSL(request *serviceKBankTestSSLRequest) (*serviceKBankTestSSLResponse, error) {
+func (s *defaultService) TestSSL(request *serviceKBankTestSSLRequest) (*serviceKBankTestSSLResponse, error) {
 
 	url := request.Url
 	tr := &http.Transport{

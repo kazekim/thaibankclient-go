@@ -2,11 +2,13 @@
   GoLang code created by Jirawat Harnsiriwatanakit https://github.com/kazekim
 */
 
-package thaibankclient
+package kbank
 
-import "github.com/mitchellh/mapstructure"
+import (
+	"github.com/mitchellh/mapstructure"
+)
 
-func (c *defaultClient) KBankTestSSL() (*KBankTestSSLResponse, error) {
+func (c *defaultClient) TestSSL() (*TestSSLResponse, error) {
 
 	if c.kBankSvc == nil {
 		return nil, ErrKBankConfigNotDefined
@@ -21,21 +23,21 @@ func (c *defaultClient) KBankTestSSL() (*KBankTestSSLResponse, error) {
 		return nil, err
 	}
 
-	var response KBankTestSSLResponse
+	var response TestSSLResponse
 	response.CertificateStatus = sResp.CertificateStatus
 	response.PartnerStatus = sResp.PartnerStatus
 
 	if sResp.ErrorMessage != nil {
-		thbErr := NewKBankTestSSLError(sResp.StatusCode, sResp.ErrorMessage)
+		thbErr := NewTestSSLError(sResp.StatusCode, sResp.ErrorMessage)
 		response.StatusCode = *sResp.StatusCode
 		response.Error = thbErr
 		return &response, nil
 	}
 
-	var certObjects []KBankCertificateObject
+	var certObjects []CertificateObject
 	for _, obj := range sResp.CertificateObjects {
 
-		var certObject KBankCertificateObject
+		var certObject CertificateObject
 		err := mapstructure.Decode(obj, &certObject)
 		if err != nil {
 			continue

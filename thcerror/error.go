@@ -2,9 +2,9 @@
   GoLang code created by Jirawat Harnsiriwatanakit https://github.com/kazekim
 */
 
-package thaibankclient
+package thcerror
 
-type THBError interface {
+type Error interface {
 	StatusCodeValue() string
 	MessageTHValue() string
 	MessageENValue() string

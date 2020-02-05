@@ -2,13 +2,13 @@
   GoLang code created by Jirawat Harnsiriwatanakit https://github.com/kazekim
 */
 
-package thaibankclient
+package kbank
 
 import (
 	"github.com/mitchellh/mapstructure"
 )
 
-func (c *defaultClient) KBankCheckBalance(request *KBankCheckBalanceRequest) (*AccountBalanceResponse, error) {
+func (c *defaultClient) CheckBalance(request *CheckBalanceRequest) (*AccountBalanceResponse, error) {
 
 	if c.kBankSvc == nil {
 		return nil, ErrKBankConfigNotDefined
